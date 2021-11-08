@@ -11,6 +11,7 @@ config_version=4
 [application]
 
 config/name="World History Generator"
+run/main_scene="res://NameGenerator.tscn"
 config/icon="res://icon.png"
 
 [physics]
