@@ -4,9 +4,9 @@ var totalSyllables = 50
 var totalNames = 100
 var totalFullNames = 20
 
-var vowels = ['a', 'e', 'i', 'o', 'u', 'ai', 'ao', 'au', 'ee', 'ei', 'oe', 'oi', 'ou', 'oo', 'ue']
+var vowels = ['a', 'e', 'i', 'o', 'u', 'ai', 'ao', 'au', 'ee', 'ei', 'oi', 'ou', 'oo']
 var consonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'qu', 'r', 's', 't', 'v', 'w', 'y', 'z', 'bl', 'cl', 'fl', 'gl', 'pl', 'br', 'cr', 'dr', 'fr', 'gr', 'pr', 'tr', 'sk', 'sl', 'sp', 'st', 'sw', 'spr', 'str', 'ch', 'sh', 'th', 'wh', 'zh']
-var endingConsonants = ['b', 'c', 'd', 'f', 'g', 'h', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'ks', 'z', 'sk', 'sp', 'st', 'ch', 'sh', 'th']
+var endingConsonants = ['b', 'c', 'd', 'f', 'g', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'ks', 'z', 'sk', 'st', 'ch', 'sh', 'th']
 var syllables = []
 var names = []
 var fullNames = []
