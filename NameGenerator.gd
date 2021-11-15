@@ -1,16 +1,34 @@
 extends Node
 
-var totalSyllables = 15
-var totalNames = 50
-var totalFullNames = 100
+var totalSyllables = 50
+var totalNames = 100
+var totalFullNames = 20
 
-var vowels = ['a', 'e', 'i', 'o', 'u', 'ae', 'ai', 'ao', 'au', 'ea', 'ee', 'ei', 'eo', 'eu', 'ia', 'ie', 'io', 'iu', 'oa', 'oe', 'oi', 'ou', 'oo', 'ua', 'ue', 'ui', 'uo']
-var consonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z', 'bl', 'cl', 'fl', 'gl', 'pl', 'br', 'cr', 'dr', 'fr', 'gr', 'pr', 'tr', 'sk', 'sl', 'sp', 'st', 'sw', 'spr', 'str', 'ch', 'sh', 'th', 'wh', 'zh']
+var vowels = ['a', 'e', 'i', 'o', 'u', 'ai', 'ao', 'au', 'ee', 'ei', 'oe', 'oi', 'ou', 'oo', 'ue']
+var consonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'qu', 'r', 's', 't', 'v', 'w', 'y', 'z', 'bl', 'cl', 'fl', 'gl', 'pl', 'br', 'cr', 'dr', 'fr', 'gr', 'pr', 'tr', 'sk', 'sl', 'sp', 'st', 'sw', 'spr', 'str', 'ch', 'sh', 'th', 'wh', 'zh']
+var endingConsonants = ['b', 'c', 'd', 'f', 'g', 'h', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'ks', 'z', 'sk', 'sp', 'st', 'ch', 'sh', 'th']
 var syllables = []
 var names = []
 var fullNames = []
 
 var rng = RandomNumberGenerator.new()
+
+func calculateSyllables():
+	# 1 syllable:  35%
+	# 2 syllables: 50%
+	# 3 syllables: 10%
+	# 4 syllables: 5%
+	var temp = 0
+	rng.randomize()
+	temp = rng.randi_range(1,100)
+	if temp < 35:
+		return 1
+	elif temp < 85:
+		return 2
+	elif temp < 95:
+		return 3
+	else:
+		return 4
 
 func _ready():
 	generateSyllables()
@@ -31,13 +49,13 @@ func generateSyllables():
 			temp += consonants[index]
 			index = rng.randi_range(0, vowels.size()-1)
 			temp += vowels[index]
-			index = rng.randi_range(0, consonants.size()-1)
-			temp += consonants[index]
+			index = rng.randi_range(0, endingConsonants.size()-1)
+			temp += endingConsonants[index]
 		elif syllableType == 1: # VC
 			index = rng.randi_range(0, vowels.size()-1)
 			temp += vowels[index]
-			index = rng.randi_range(0, consonants.size()-1)
-			temp += consonants[index]
+			index = rng.randi_range(0, endingConsonants.size()-1)
+			temp += endingConsonants[index]
 		elif syllableType == 2: # CV
 			index = rng.randi_range(0, consonants.size()-1)
 			temp += consonants[index]
@@ -55,13 +73,14 @@ func generateName():
 	
 	while names.size() < totalNames:
 		temp = ""
-		numSyllables = rng.randi_range(1,2)
+		numSyllables = calculateSyllables()
 		for j in numSyllables:
 			index = rng.randi_range(0, syllables.size()-1)
 			temp += syllables[index]
 		temp = temp.capitalize()
 		
 		if not temp in names:
+			temp = checkName(temp)
 			names.append(temp)
 	
 func generateFullNames():
@@ -80,3 +99,16 @@ func generateFullNames():
 		if not temp in fullNames:
 			fullNames.append(temp)
 	print(fullNames)
+	
+func checkName(name):
+	var numVowelsInARow = 0
+	var index = 0
+	for i in name:
+		index += 1
+		if i in vowels:
+			numVowelsInARow += 1
+		else: 
+			numVowelsInARow = 0
+		if numVowelsInARow >= 3:
+			name.erase(index - 2 , 1)
+	return name
