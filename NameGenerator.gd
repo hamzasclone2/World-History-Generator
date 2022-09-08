@@ -1,5 +1,7 @@
 extends Node
 
+onready var label = get_node("Label")
+
 var totalSyllables = 50
 var totalNames = 100
 var totalFullNames = 20
@@ -13,27 +15,16 @@ var fullNames = []
 
 var rng = RandomNumberGenerator.new()
 
-func calculateSyllables():
-	# 1 syllable:  35%
-	# 2 syllables: 50%
-	# 3 syllables: 10%
-	# 4 syllables: 5%
-	var temp = 0
-	rng.randomize()
-	temp = rng.randi_range(1,100)
-	if temp < 35:
-		return 1
-	elif temp < 85:
-		return 2
-	elif temp < 95:
-		return 3
-	else:
-		return 4
-
 func _ready():
 	generateSyllables()
 	generateName()
 	generateFullNames()
+	fullNamesToString()
+	
+func fullNamesToString():
+	for a in fullNames:
+		label.text += a
+		label.text += "\n"
 	
 func generateSyllables():
 	rng.randomize()
@@ -98,7 +89,6 @@ func generateFullNames():
 			
 		if not temp in fullNames:
 			fullNames.append(temp)
-	print(fullNames)
 	
 func checkName(name):
 	var numVowelsInARow = 0
@@ -112,3 +102,20 @@ func checkName(name):
 		if numVowelsInARow >= 3:
 			name.erase(index - 2 , 1)
 	return name
+	
+func calculateSyllables():
+	# 1 syllable:  35%
+	# 2 syllables: 50%
+	# 3 syllables: 10%
+	# 4 syllables: 5%
+	var temp = 0
+	rng.randomize()
+	temp = rng.randi_range(1,100)
+	if temp < 35:
+		return 1
+	elif temp < 85:
+		return 2
+	elif temp < 95:
+		return 3
+	else:
+		return 4
