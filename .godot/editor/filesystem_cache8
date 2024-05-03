@@ -1,0 +1,9 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1714768215
+default_env.tres::Environment::-1::1714768188::0::1::::<><>::
+icon.png::CompressedTexture2D::1842991120163238291::1662596040::1714768217::1::::<><>::
+NameGenerator.gd::GDScript::-1::1714768188::0::1::::<>Node<>::
+NameGenerator.tscn::PackedScene::-1::1714768188::0::1::::<><>::res://NameGenerator.gd
+Person.gd::GDScript::-1::1714768188::0::1::::<>Node<>::
+Person.tscn::PackedScene::-1::1714768188::0::1::::<><>::res://Person.gd
+README.md::TextFile::-1::1662596040::0::1::::<><>::

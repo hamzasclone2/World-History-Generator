@@ -1,6 +1,6 @@
 extends Node
 
-onready var label = get_node("Label")
+@onready var label = get_node("Label")
 
 var totalSyllables = 50
 var totalNames = 100
